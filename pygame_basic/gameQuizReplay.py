@@ -22,19 +22,46 @@ clock = pygame.time.Clock()
 
 # 배경 이미지 불러오기
 
+background = pygame.image.load("D:/pythongame/pygame_basic/background.png")
+
 # 스프라이트 (캐릭터) 불러오기
+
+character = pygame.image.load("D:/pythongame/pygame_basic/character.png")
+character_size = character.get_rect().size
+character_width = character_size[0]
+character_hight = character_size[1]
+character_x_pos = (screen_width / 2) - (character_width / 2)
+character_y_pos = screen_height - character_hight
 
 # 이동할 좌표
 
+to_x = 0
+to_y = 0
+
 # 이동 속도
+
+character_speed = 0.6
 
 # 스프라이트 적 enemy 캐릭터 불러오기
 
+enemy = pygame.image.load("D:/pythongame/pygame_basic/enemy.png")
+enemy_size = enemy.get_rect().size
+enemy_width = enemy_size[0]
+enemy_hight = enemy_size[1]
+enemy_x_pos = (screen_width / 2) - (enemy_width / 2)
+enemy_y_pos = (screen_height / 2) - (enemy_hight / 2)
+
 # 폰트 정의
+
+game_font = pygame.font.Font(None, 40)
 
 # 총 시간
 
+total_time = 0
+
 # 시작 시간
+
+start_ticks = pygame.time.get_ticks()
 
 
 # 이벤트 루프
@@ -50,11 +77,21 @@ while running:
         if event.type == pygame.QUIT: 
             running = False 
 
+        if event.type == pygame.KEYDOWN: # 방향키가 눌리면
+            if event.key == pygame.K_LEFT: 
+                to_x -= character_speed
+
+            elif event.key == pygame.K_RIGHT:
+                to_x += character_speed
+
+        if event.type == pygame.KEYUP: # 방향키를 떼면 멈춤
+            to_x == 0
+
 #########################################################################################################################
 
     # 3. 게임 캐릭터 위치 정의
 #########################################################################################################################
-#     
+
  
 
 #########################################################################################################################
@@ -70,6 +107,11 @@ while running:
 #########################################################################################################################
 #    # 5. 화면에 그리기        
 
+    screen.blit(background, (0, 0))
+
+    screen.blit(character, (character_x_pos, character_y_pos))
+
+    screen.blit(enemy, (enemy_x_pos, enemy_y_pos))
    
 
     # 타이머 집어 넣기
