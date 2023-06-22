@@ -92,13 +92,21 @@ while running:
     # 3. 게임 캐릭터 위치 정의
 #########################################################################################################################
 
- 
+        character_x_pos = character_x_pos + to_x * dt
+        character_y_pos = character_y_pos + to_y * dt
+
+        if character_x_pos < 0:
+            character_x_pos = 0
+        elif character_x_pos > screen_width - character_width:
+            character_x_pos = screen_width - character_width
 
 #########################################################################################################################
 
     # 4. 충돌 처리
 #########################################################################################################################
 
+    character_rect = character.get_rect()
+    enemy_rect = enemy.get_rect()
  
 
     # 충돌 체크
