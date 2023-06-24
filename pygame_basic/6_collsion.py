@@ -51,13 +51,13 @@ while running:
 
         if event.type == pygame.KEYDOWN: # 키가 눌러졌는지 확인
             if event.key == pygame.K_LEFT: # 캐릭터를 왼쪽으로
-                to_x -= character_speed # to_x = to_x - 5
+                to_x -= character_speed 
             elif event.key == pygame.K_RIGHT: # 캐릭터를 오른쪽으로
-                to_x += character_speed # to_x = to_x + 5
+                to_x += character_speed 
             elif event.key == pygame.K_UP: # 캐릭터를 위로
-                to_y -= character_speed # to_y = to_y - 5
+                to_y -= character_speed 
             elif event.key == pygame.K_DOWN: # 캐릭터를 아래로
-                to_y += character_speed # to_y = to_y + 5
+                to_y += character_speed 
 
 
         if event.type == pygame.KEYUP: # 방향키를 떼면 멈춤
@@ -94,7 +94,7 @@ while running:
 
     # 충돌 체크
     if character_rect.colliderect(enemy_rect): # 캐릭터와 적이 충돌했는지 확인
-        print("적과 출돌 했습니다.")
+        print("적과 충돌 했습니다.")
         running = False # 게임 종료
 
     screen.blit(background, (0, 0)) # 배경 그리기

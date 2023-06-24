@@ -103,7 +103,7 @@ while running:
 
     # 충돌 체크
     if character_rect.colliderect(enemy_rect): # 캐릭터와 적이 충돌했는지 확인
-        print("적과 출돌 했습니다.")
+        print("적과 충돌 했습니다.")
         running = False # 게임 종료
 
     screen.blit(background, (0, 0)) # 배경 그리기
