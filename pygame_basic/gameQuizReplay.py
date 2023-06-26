@@ -86,6 +86,7 @@ while running:
 #########################################################################################################################
 #     
     character_x_pos += to_x * dt
+    print(character_x_pos)
 
     if character_x_pos < 0:
         character_x_pos = 0
