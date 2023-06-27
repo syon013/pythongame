@@ -1,5 +1,4 @@
 import pygame
-import random
 import os
 
 # 기본 초기화 (반드시 해야 하는 것들)
