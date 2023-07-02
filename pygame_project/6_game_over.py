@@ -47,7 +47,9 @@ character_y_pos = screen_height - character_height - stage_height
 
 # 이동할 좌표
 
-character_to_x = 0
+# character_to_x = 0
+character_to_x_LEFT = 0
+character_to_x_RIGHT = 0
 
 # 이동 속도
 
@@ -129,17 +131,19 @@ while running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                character_to_x -= character_speed
+                character_to_x_LEFT -= character_speed
             elif event.key == pygame.K_RIGHT:
-                character_to_x += character_speed
+                character_to_x_RIGHT += character_speed
             elif event.key == pygame.K_SPACE: # 무기 발사
                 weapon_x_pos = character_x_pos + (character_width/2) - (weapon_width/2)
                 weapon_y_pos = character_y_pos
                 weapons.append([weapon_x_pos, weapon_y_pos])
 
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                character_to_x = 0
+            if event.key == pygame.K_LEFT:
+                character_to_x_LEFT = 0
+            elif event.key == pygame.K_RIGHT:
+                character_to_x_RIGHT = 0
 
     
 
@@ -148,7 +152,7 @@ while running:
     # 3. 게임 캐릭터 위치 정의
 #########################################################################################################################
         
-    character_x_pos += character_to_x * dt
+    character_x_pos += (character_to_x_LEFT + character_to_x_RIGHT) * dt
 
     if character_x_pos < 0:
         character_x_pos = 0
@@ -184,8 +188,6 @@ while running:
 
         ball_val["pos_x"] += ball_val["to_x"]
         ball_val["pos_y"] += ball_val["to_y"]
-
-        print(ball_val["pos_x"], ball_val["pos_y"])
 
 #########################################################################################################################
 
@@ -257,6 +259,19 @@ while running:
                         "init_spd_y" : ball_speed_y[ball_img_idx + 1]}) # y 최초 속도
 
                 break
+        else: # 계속 게임을 진행
+            continue # 안쪽 for 문 조건이 맞지 않으면 continue. 바깥 for 문 계속 수행
+        break # 안쪽 for문에서 break를 만나면 여기로 진입 가능, 2중 for문을 한번에 탈출
+
+    # for 바깥조건:
+    #     바깥동작
+    #     for 안쪽조건:
+    #         안쪽동작
+    #         if 충돌하면:
+    #             break
+    #     else:
+    #         continue
+    #     break
 
     #충돌된 공 or 무기 없애기
     if ball_to_remove > -1:
